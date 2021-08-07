@@ -11,4 +11,4 @@ I am going to use go gin. To check it please visit https://github.com/gin-gonic/
 ## Download Needed Modules
 
 Run this command on terminal 
-# go module tidy
+#go module tidy
