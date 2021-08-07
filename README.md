@@ -6,7 +6,7 @@ You can visit at https://golang.org/dl/ to download go. Don't forget the add it 
 
 ## Go Gin
 
-I am going to use go gin. To check it please visit https://github.com/gin-gonic/gin".
+I am using go gin. To check it please visit https://github.com/gin-gonic/gin".
 
 ## Download Needed Modules
 
