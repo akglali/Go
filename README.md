@@ -12,3 +12,7 @@ I am using go gin. To check it please visit https://github.com/gin-gonic/gin".
 
 Run this command on terminal 
 #go module tidy
+
+## Database Tables
+### users Table
+user_id uuid, username text,password text,token text 
