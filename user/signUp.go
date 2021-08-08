@@ -44,7 +44,7 @@ func signup(c *gin.Context) {
 		return
 	}
 
-	c.String(200, "user is successfully created")
+	c.JSON(200, "user is successfully created")
 }
 
 func login(c *gin.Context) {
@@ -77,5 +77,6 @@ func login(c *gin.Context) {
 		c.JSON(400, helpers.ErrorStruct{
 			Error: "Check your password",
 		})
+		return
 	}
 }

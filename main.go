@@ -11,6 +11,14 @@ func main() {
 	r := gin.Default()
 	database.SetupDatabase()
 
+	r.Use(func(context *gin.Context) {
+		context.Header("Access-Control-Allow-Origin", "*")
+		context.Header("Access-Control-Allow-Headers", "*")
+		if context.Request.Method == "OPTIONS" {
+			context.Status(200)
+			context.Abort()
+		}
+	})
 	users := r.Group("/user")
 	user.SetupUser(users)
 
