@@ -13,6 +13,10 @@ I am using go gin framework. To check it please visit https://github.com/gin-gon
 Run this command on terminal 
 #go module tidy
 
+## Front-End With Angular
+
+Visit https://github.com/akglali/Angular to see Front-End of the app.
+
 ## Database Tables (Postgres Sql)
 ### users Table
 user_id uuid, username text,password text,token text 
