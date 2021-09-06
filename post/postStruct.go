@@ -7,7 +7,6 @@ type postStruct struct {
 }
 type post struct {
 	PostId       string
-	UserId       string
 	VirtualName  string
 	TextContent  string
 	CommentCount *uint

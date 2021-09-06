@@ -6,13 +6,14 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"time"
-	"vibraninlyGo/database"
+	"vibraninlyGo/database/postDb"
 	"vibraninlyGo/helpers"
 )
 
 func SetupPost(rg *gin.RouterGroup) {
 	rg.POST("/newpost", postSinglePost)
 	rg.GET("/getallpost", getAllPost)
+	rg.GET("/getpost/:postId", getSinglePost)
 }
 
 func postSinglePost(c *gin.Context) {
@@ -29,31 +30,54 @@ func postSinglePost(c *gin.Context) {
 		c.JSON(400, helpers.ErrorStruct{
 			Error: "Bad input",
 		})
-	}
-	token := c.GetHeader("token")
-	nickname := randomNickname()
-	currentTime := time.Now().Format("2006.01.02 15:04:05")
-	_, err = database.Db.Query("insert into  post_table( user_id, nickname, text_field, comment_count, posted_date, likes, dislikes,color) values((select user_id from users where token=$1),$2,$3,$4,$5,$4,$4,$6)", token, nickname, body.TextField, 0, currentTime, randomColor())
-
-	if err != nil {
-		c.JSON(400, helpers.ErrorStruct{
-			Error: "Something went wrong",
-		})
 		return
 	}
 
-	c.String(200, "Post Is created")
+	token := c.GetHeader("token")
+	nickname := randomNickname()
+	currentTime := time.Now().Format("2006.01.02 15:04:05")
+	err, row := postDb.PostSinglePostDb(token, nickname, body.TextField, currentTime, randomColor())
+
+	if err != nil {
+		c.JSON(400, helpers.ErrorStruct{
+			Error: "Something went wrong please try again later!",
+		})
+		return
+	}
+	var pst post
+	err = row.Scan(&pst.PostId, &pst.VirtualName, &pst.TextContent, &pst.CommentCount, &pst.Color, &pst.DateCreated, &pst.Likes, &pst.Dislikes)
+	if err != nil {
+		c.JSON(400, helpers.ErrorStruct{
+			Error: "We could not reach the post!",
+		})
+		return
+	}
+	c.JSON(200, pst)
 
 }
 
 func getAllPost(c *gin.Context) {
 	allRows, _ := getAllRows()
 	c.JSON(200, allRows)
+}
+
+func getSinglePost(c *gin.Context) {
+	postId := c.Param("postId")
+	row := postDb.GetSinglePostDb(postId)
+	var pst post
+	err := row.Scan(&pst.PostId, &pst.VirtualName, &pst.TextContent, &pst.CommentCount, &pst.DateCreated, &pst.Likes, &pst.Dislikes, &pst.Color)
+	if err != nil {
+		c.JSON(400, helpers.ErrorStruct{
+			Error: "We could not reach the post",
+		})
+		return
+	}
+	c.JSON(200, pst)
 
 }
 
 func getAllRows() ([]post, error) {
-	rows, err := database.Db.Query("select * from post_table order by posted_date desc")
+	rows, err := postDb.GetAllPostDb()
 	if err != nil {
 		return nil, err
 	}
@@ -62,13 +86,13 @@ func getAllRows() ([]post, error) {
 		if err != nil {
 			fmt.Println("Rows couldn't be read")
 		}
+		return
 	}(rows)
 
 	var posts []post
-
 	for rows.Next() {
 		var pst post
-		if err := rows.Scan(&pst.PostId, &pst.UserId, &pst.VirtualName, &pst.TextContent, &pst.CommentCount, &pst.DateCreated, &pst.Likes, &pst.Dislikes, &pst.Color); err != nil {
+		if err := rows.Scan(&pst.PostId, &pst.VirtualName, &pst.TextContent, &pst.CommentCount, &pst.DateCreated, &pst.Likes, &pst.Dislikes, &pst.Color); err != nil {
 			return posts, err
 		}
 		posts = append(posts, pst)
