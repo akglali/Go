@@ -18,3 +18,5 @@ Run this command on terminal
 user_id uuid, username text,password text,token text 
 ### post_table 
 post_id uuid, user_id uuid, nickname text ,text_field text, comment_count int, posted_date timestamp, likes int ,dislikes int,color text
+### post_user_nickname_table
+post_id uuid, user_id uuid, nickname text,color text
