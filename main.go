@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"vibraninlyGo/comment"
 	"vibraninlyGo/database"
 	"vibraninlyGo/post"
 	user "vibraninlyGo/user"
@@ -25,6 +26,10 @@ func main() {
 
 	posts := r.Group("/post")
 	post.SetupPost(posts)
+
+	comments := r.Group("/comment")
+	comment.SetupComment(comments)
+
 	err := r.Run(":8000")
 	if err != nil {
 		return

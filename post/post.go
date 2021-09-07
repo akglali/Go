@@ -34,9 +34,9 @@ func postSinglePost(c *gin.Context) {
 	}
 
 	token := c.GetHeader("token")
-	nickname := randomNickname()
+	nickname := RandomNickname()
 	currentTime := time.Now().Format("2006.01.02 15:04:05")
-	err, row := postDb.PostSinglePostDb(token, nickname, body.TextField, currentTime, randomColor())
+	err, row := postDb.PostSinglePostDb(token, nickname, body.TextField, currentTime, RandomColor())
 
 	if err != nil {
 		c.JSON(400, helpers.ErrorStruct{
@@ -61,21 +61,6 @@ func getAllPost(c *gin.Context) {
 	c.JSON(200, allRows)
 }
 
-func getSinglePost(c *gin.Context) {
-	postId := c.Param("postId")
-	row := postDb.GetSinglePostDb(postId)
-	var pst post
-	err := row.Scan(&pst.PostId, &pst.VirtualName, &pst.TextContent, &pst.CommentCount, &pst.DateCreated, &pst.Likes, &pst.Dislikes, &pst.Color)
-	if err != nil {
-		c.JSON(400, helpers.ErrorStruct{
-			Error: "We could not reach the post",
-		})
-		return
-	}
-	c.JSON(200, pst)
-
-}
-
 func getAllRows() ([]post, error) {
 	rows, err := postDb.GetAllPostDb()
 	if err != nil {
@@ -98,4 +83,19 @@ func getAllRows() ([]post, error) {
 		posts = append(posts, pst)
 	}
 	return posts, err
+}
+
+func getSinglePost(c *gin.Context) {
+	postId := c.Param("postId")
+	row := postDb.GetSinglePostDb(postId)
+	var pst post
+	err := row.Scan(&pst.PostId, &pst.VirtualName, &pst.TextContent, &pst.CommentCount, &pst.DateCreated, &pst.Likes, &pst.Dislikes, &pst.Color)
+	if err != nil {
+		c.JSON(400, helpers.ErrorStruct{
+			Error: "We could not reach the post",
+		})
+		return
+	}
+	c.JSON(200, pst)
+
 }

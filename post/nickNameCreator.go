@@ -8,7 +8,7 @@ var animals [12]string = [12]string{"Duck", "Dog", "Elephant", "Aardvark", "Affe
 var adjective [12]string = [12]string{"Elegant", "Exquisite", "Glorious", "Aardvark", "Junoesque", "Magnificent", "Resplendent",
 	"Splendid", "Statuesque", "Blue-eyed", "Busy", "Brave"}
 
-func randomNickname() string {
+func RandomNickname() string {
 	randomAnimalsNum := rand.Intn(len(animals))
 	randomAdjectivesNum := rand.Intn(len(adjective))
 	pickAnimal := animals[randomAnimalsNum]
@@ -20,7 +20,7 @@ func randomNickname() string {
 var colors = [16]string{
 	"bg-blue-100", "bg-red-100", "bg-purple-100", "bg-gray-100", "bg-green-100", "bg-yellow-100", "bg-indigo-100", "bg-pink-100", "bg-blue-300", "bg-red-300", "bg-purple-300", "bg-gray-300", "bg-green-300", "bg-yellow-300", "bg-indigo-300", "bg-pink-300"}
 
-func randomColor() string {
+func RandomColor() string {
 	randomColorsNum := rand.Intn(len(colors))
 	pickColor := colors[randomColorsNum]
 	return pickColor
