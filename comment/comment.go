@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"time"
 	"vibraninlyGo/database/commentDb"
 	"vibraninlyGo/helpers"
 	"vibraninlyGo/post"
@@ -33,14 +34,15 @@ func postComment(c *gin.Context) {
 	}
 	token := c.GetHeader("token")
 	nickname, color := commentDb.GetNicknameAndColor(body.PostId, token)
-
+	currentTime := time.Now().Format("2006.01.02 15:04:05")
+	var row *sql.Row
 	if nickname == "" {
 		randomNickname := post.RandomNickname()
 		randomColor := post.RandomColor()
 		nicknames, _ := getAllNicknames(body.PostId)
 		for checkNickname(&randomNickname, nicknames) {
 		}
-		err := commentDb.InsertNicknameTable(body.PostId, token, randomNickname, body.TextField, randomColor)
+		err, row = commentDb.InsertNicknameTable(body.PostId, token, randomNickname, body.TextField, currentTime, randomColor)
 		if err != nil {
 			c.JSON(400, helpers.ErrorStruct{
 				Error: "Something went wrong with nickname",
@@ -48,7 +50,7 @@ func postComment(c *gin.Context) {
 			return
 		}
 	} else {
-		err := commentDb.InsertComment(body.PostId, token, nickname, body.TextField, color)
+		err, row = commentDb.InsertComment(body.PostId, token, nickname, body.TextField, color, currentTime)
 		if err != nil {
 			c.JSON(400, helpers.ErrorStruct{
 				Error: "Comment couldn't be added",
@@ -56,7 +58,16 @@ func postComment(c *gin.Context) {
 			return
 		}
 	}
-	c.JSON(200, "comment is added")
+	var comment commentStruct
+	err = row.Scan(&comment.CommentId, &comment.PostId, &comment.TextField, &comment.Nickname, &comment.Likes, &comment.Dislikes, &comment.CommentColor, &comment.CommentDateCreated)
+	if err != nil {
+		c.JSON(400, helpers.ErrorStruct{
+			Error: "We could not reach the comment!",
+		})
+		return
+	}
+
+	c.JSON(200, comment)
 }
 
 // getting all nicknames since every user has unique nickname for single post. So need to check to prevent duplicate nickname
@@ -127,7 +138,7 @@ func getAllCommentRows(postId string) ([]commentStruct, error) {
 
 	for rows.Next() {
 		var comment commentStruct
-		if err := rows.Scan(&comment.CommentId, &comment.PostId, &comment.TextField, &comment.Nickname, &comment.Likes, &comment.Dislikes, &comment.CommentColor); err != nil {
+		if err := rows.Scan(&comment.CommentId, &comment.PostId, &comment.TextField, &comment.Nickname, &comment.Likes, &comment.Dislikes, &comment.CommentColor, &comment.CommentDateCreated); err != nil {
 			return comments, err
 		}
 		comments = append(comments, comment)
