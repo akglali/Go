@@ -55,7 +55,7 @@ func incrementCommentCount(postId string) error {
 }
 
 func GetAllCommentRows(postId string) (*sql.Rows, error) {
-	rows, err := database.Db.Query("select comment_id,post_id,text_content,nickname,likes,dislikes,comment_color,comment_date_created from comment_table where post_id=$1 order by comment_date_created", postId)
+	rows, err := database.Db.Query("select comment_id,post_id,text_content,nickname,likes,dislikes,comment_color,comment_date_created from comment_table where post_id=$1 order by comment_date_created desc ", postId)
 	return rows, err
 }
 
