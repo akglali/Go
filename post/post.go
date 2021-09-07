@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"time"
-	"vibraninlyGo/database/postDb"
 	"vibraninlyGo/helpers"
+	"vibraninlyGo/post/postDb"
 )
 
 func SetupPost(rg *gin.RouterGroup) {

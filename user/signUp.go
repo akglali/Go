@@ -3,8 +3,8 @@ package user
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"vibraninlyGo/database/userDb"
 	"vibraninlyGo/helpers"
+	"vibraninlyGo/user/userDb"
 )
 
 func SetupUser(rg *gin.RouterGroup) {

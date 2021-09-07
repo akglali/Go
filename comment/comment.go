@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"time"
-	"vibraninlyGo/database/commentDb"
+	"vibraninlyGo/comment/commentDb"
 	"vibraninlyGo/helpers"
 	"vibraninlyGo/post"
 )
@@ -27,7 +27,7 @@ func postComment(c *gin.Context) {
 	}
 	err = json.Unmarshal(data, &body)
 	if err != nil {
-		c.JSON(400, helpers.ErrorStruct{
+		c.AbortWithStatusJSON(400, helpers.ErrorStruct{
 			Error: "Bad input",
 		})
 		return
@@ -37,14 +37,17 @@ func postComment(c *gin.Context) {
 	currentTime := time.Now().Format("2006.01.02 15:04:05")
 	var row *sql.Row
 	if nickname == "" {
-		randomNickname := post.RandomNickname()
+		var randomNickname string
 		randomColor := post.RandomColor()
-		nicknames, _ := getAllNicknames(body.PostId)
+		nicknames, err := getAllNicknames(body.PostId)
+		if err != nil {
+			c.AbortWithStatusJSON(400, helpers.ErrorStruct{Error: "wops"})
+		}
 		for checkNickname(&randomNickname, nicknames) {
 		}
 		err, row = commentDb.InsertNicknameTable(body.PostId, token, randomNickname, body.TextField, currentTime, randomColor)
 		if err != nil {
-			c.JSON(400, helpers.ErrorStruct{
+			c.AbortWithStatusJSON(400, helpers.ErrorStruct{
 				Error: "Something went wrong with nickname",
 			})
 			return
