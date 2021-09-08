@@ -14,25 +14,23 @@ func SetupPost(rg *gin.RouterGroup) {
 	rg.POST("/newpost", postSinglePost)
 	rg.GET("/getallpost", getAllPost)
 	rg.GET("/getpost/:postId", getSinglePost)
+	rg.GET("/getowner", getPostsOwner)
+	rg.GET("/getowner/:postId", getSinglePostOwner)
+	rg.POST("/edit/:postId", editPost)
 }
 
 func postSinglePost(c *gin.Context) {
 	body := postStruct{}
 	data, err := c.GetRawData()
 	if err != nil {
-		c.JSON(400, helpers.ErrorStruct{
-			Error: "Input format is wrong",
-		})
+		helpers.MyAbort(c, "Input format is wrong")
 		return
 	}
 	err = json.Unmarshal(data, &body)
 	if err != nil {
-		c.JSON(400, helpers.ErrorStruct{
-			Error: "Bad input",
-		})
+		helpers.MyAbort(c, "Bad input")
 		return
 	}
-
 	token := c.GetHeader("token")
 	nickname := RandomNickname()
 	currentTime := time.Now().Format("2006.01.02 15:04:05")
@@ -53,7 +51,6 @@ func postSinglePost(c *gin.Context) {
 		return
 	}
 	c.JSON(200, pst)
-
 }
 
 func getAllPost(c *gin.Context) {
@@ -97,5 +94,4 @@ func getSinglePost(c *gin.Context) {
 		return
 	}
 	c.JSON(200, pst)
-
 }
