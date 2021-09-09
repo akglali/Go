@@ -71,3 +71,25 @@ func editPost(c *gin.Context) {
 	c.JSON(200, gin.H{"TextContent": body.TextField, "DateCreated": currentTime})
 
 }
+
+func deletePost(c *gin.Context) {
+	token := c.GetHeader("Token")
+	postId := c.Param("postId")
+	var trueOrFalse bool
+	err := database.Db.QueryRow("select exists(select 1 from post_table where user_id=(select user_id from users where token=$1) and post_id=$2)", token, postId).Scan(&trueOrFalse)
+	if err != nil {
+		helpers.MyAbort(c, "The post could not be found")
+	}
+	if trueOrFalse {
+		_, err := database.Db.Exec("with d as (delete from post_table where post_id=$1 returning post_id) delete from comment_table where  post_id in (select post_id from d)", postId)
+		if err != nil {
+			helpers.MyAbort(c, "The post could not be deleted")
+			return
+		}
+	} else {
+		helpers.MyAbort(c, "Are you the owner???")
+		return
+	}
+	c.JSON(200, "Post with postId"+postId+" is deleted successfully.")
+
+}
