@@ -2,10 +2,8 @@ package post
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"time"
-	"vibraninlyGo/database"
 	"vibraninlyGo/helpers"
 	"vibraninlyGo/post/postDb"
 )
@@ -52,15 +50,13 @@ func editPost(c *gin.Context) {
 		helpers.MyAbort(c, "Bad Input")
 		return
 	}
-	var trueOrFalse bool
 	currentTime := time.Now().Format("2006.01.02 15:04:05")
-	err = database.Db.QueryRow("select exists(select 1 from post_table where user_id=(select user_id from users where token=$1) and post_id=$2)", token, postId).Scan(&trueOrFalse)
+	err, trueOrFalse := postDb.LetOnlyOwner(token, postId)
 	if err != nil {
-		helpers.MyAbort(c, "The post couldn't be found")
-		return
+		helpers.MyAbort(c, "The post could not be found")
 	}
 	if trueOrFalse {
-		_, err := database.Db.Exec("update post_table set text_field=$1,posted_date=$3 where post_id=$2", body.TextField, postId, currentTime)
+		_, err := postDb.UpdatePost(body.TextField, postId, currentTime)
 		if err != nil {
 			helpers.MyAbort(c, "Check your input please")
 			return
@@ -76,17 +72,14 @@ func editPost(c *gin.Context) {
 func deletePost(c *gin.Context) {
 	token := c.GetHeader("Token")
 	postId := c.Param("postId")
-	var trueOrFalse bool
-	err := database.Db.QueryRow("select exists(select 1 from post_table where user_id=(select user_id from users where token=$1) and post_id=$2)", token, postId).Scan(&trueOrFalse)
+	err, trueOrFalse := postDb.LetOnlyOwner(token, postId)
 	if err != nil {
 		helpers.MyAbort(c, "The post could not be found")
 	}
 	if trueOrFalse {
-		_, err := database.Db.Exec("WITH d as (delete from post_table where post_id=$1),cd as ( delete from post_user_nickname_table where post_id = $1) delete from comment_table where  post_id=$1", postId)
-		fmt.Println("NEW")
+		_, err := postDb.DeletePost(postId)
 		if err != nil {
 			helpers.MyAbort(c, "The post could not be deleted")
-			panic(err)
 			return
 		}
 	} else {

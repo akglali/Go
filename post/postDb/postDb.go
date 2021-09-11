@@ -45,3 +45,19 @@ func GetSinglePostOwnerDb(token, postId string) (bool, error) {
 	return trueOrFalse, err
 
 }
+
+func LetOnlyOwner(token, postId string) (error, bool) {
+	var trueFalse bool
+	err := database.Db.QueryRow("select exists(select 1 from post_table where user_id=(select user_id from users where token=$1) and post_id=$2)", token, postId).Scan(&trueFalse)
+	return err, trueFalse
+}
+
+func UpdatePost(textField, postId, currentTime string) (sql.Result, error) {
+	result, err := database.Db.Exec("update post_table set text_field=$1,posted_date=$3 where post_id=$2", textField, postId, currentTime)
+	return result, err
+}
+
+func DeletePost(postId string) (sql.Result, error) {
+	result, err := database.Db.Exec("WITH d as (delete from post_table where post_id=$1),cd as ( delete from post_user_nickname_table where post_id = $1) delete from comment_table where  post_id=$1", postId)
+	return result, err
+}
