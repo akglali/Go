@@ -25,5 +25,7 @@ func tokenGenerator() string {
 		return ""
 	}
 	currentTime := time.Now().Format("Mon Jan _2 15:04:05 2006")
-	return hex.EncodeToString(b) + currentTime
+	b = append(b, []byte(currentTime)...)
+
+	return hex.EncodeToString(b)
 }

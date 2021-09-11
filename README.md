@@ -21,8 +21,8 @@ Visit https://github.com/akglali/Angular to see Front-End of the app.
 ### users Table (name type)
 user_id uuid, username text,password text,token text 
 ### post_table (name type)
-post_id uuid, user_id uuid, nickname text ,text_field text, comment_count int, posted_date timestamp, likes int ,dislikes int,color text
+post_id uuid, user_id uuid,text_field text, comment_count int, posted_date timestamp, likes int ,dislikes int
 ### post_user_nickname_table (name type)
 post_id uuid, user_id uuid, nickname text,color text
 ### comment_table (name type)
-comment_id uuid,post_id uuid, user_id uuid, text_content text ,nickname text,likes int,dislikes int,comment_color text.
+comment_id uuid,post_id uuid, user_id uuid, text_content text,likes int,dislikes int

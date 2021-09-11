@@ -16,8 +16,8 @@ func SetupPost(rg *gin.RouterGroup) {
 	rg.GET("/getpost/:postId", getSinglePost)
 	rg.GET("/getowner", getPostsOwner)
 	rg.GET("/getowner/:postId", getSinglePostOwner)
-	rg.POST("/edit/:postId", editPost)
-	rg.GET("delete/:postId", deletePost)
+	rg.PUT("/edit/:postId", editPost)
+	rg.DELETE("/delete/:postId", deletePost)
 }
 
 func postSinglePost(c *gin.Context) {

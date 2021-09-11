@@ -33,7 +33,7 @@ func postComment(c *gin.Context) {
 		return
 	}
 	token := c.GetHeader("token")
-	nickname, color := commentDb.GetNicknameAndColor(body.PostId, token)
+	nickname := commentDb.GetNicknameAndColor(body.PostId, token)
 	currentTime := time.Now().Format("2006.01.02 15:04:05")
 	var row *sql.Row
 	if nickname == "" {
@@ -53,7 +53,7 @@ func postComment(c *gin.Context) {
 			return
 		}
 	} else {
-		err, row = commentDb.InsertComment(body.PostId, token, nickname, body.TextField, color, currentTime)
+		err, row = commentDb.InsertComment(body.PostId, token, body.TextField, currentTime)
 		if err != nil {
 			c.JSON(400, helpers.ErrorStruct{
 				Error: "Comment couldn't be added",

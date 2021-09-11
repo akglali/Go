@@ -2,6 +2,7 @@ package post
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"time"
 	"vibraninlyGo/database"
@@ -81,15 +82,17 @@ func deletePost(c *gin.Context) {
 		helpers.MyAbort(c, "The post could not be found")
 	}
 	if trueOrFalse {
-		_, err := database.Db.Exec("with d as (delete from post_table where post_id=$1 returning post_id) delete from comment_table where  post_id in (select post_id from d)", postId)
+		_, err := database.Db.Exec("WITH d as (delete from post_table where post_id=$1),cd as ( delete from post_user_nickname_table where post_id = $1) delete from comment_table where  post_id=$1", postId)
+		fmt.Println("NEW")
 		if err != nil {
 			helpers.MyAbort(c, "The post could not be deleted")
+			panic(err)
 			return
 		}
 	} else {
 		helpers.MyAbort(c, "Are you the owner???")
 		return
 	}
-	c.JSON(200, "Post with postId"+postId+" is deleted successfully.")
+	c.JSON(200, "Post with postId  "+postId+" is deleted successfully.")
 
 }
