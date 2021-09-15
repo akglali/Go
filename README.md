@@ -10,9 +10,8 @@ I am using go gin framework. To check it please visit https://github.com/gin-gon
 
 ## Download Needed Modules
 
-#Run this command on terminal 
-
-go module tidy
+Run this command on terminal 
+#go module tidy
 
 ## Front-End With Angular
 
