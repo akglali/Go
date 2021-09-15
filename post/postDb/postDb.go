@@ -58,6 +58,6 @@ func UpdatePost(textField, postId, currentTime string) (sql.Result, error) {
 }
 
 func DeletePost(postId string) (sql.Result, error) {
-	result, err := database.Db.Exec("WITH d as (delete from post_table where post_id=$1),cd as ( delete from post_user_nickname_table where post_id = $1) delete from comment_table where  post_id=$1", postId)
+	result, err := database.Db.Exec("WITH d as (delete from post_table where post_id=$1),cd as ( delete from post_user_nickname_table where post_id = $1) ,del as (delete from comment_table where  post_id=$1) delete from like_dislike_table where post_id=$1", postId)
 	return result, err
 }

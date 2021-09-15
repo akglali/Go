@@ -15,3 +15,9 @@ type post struct {
 	Dislikes     uint
 	Color        string
 }
+
+type likeDislike struct {
+	PostId        string
+	CommentId     string
+	LikeOrDislike string
+}

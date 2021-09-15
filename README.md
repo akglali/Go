@@ -10,8 +10,9 @@ I am using go gin framework. To check it please visit https://github.com/gin-gon
 
 ## Download Needed Modules
 
-Run this command on terminal 
-#go module tidy
+#Run this command on terminal 
+
+go module tidy
 
 ## Front-End With Angular
 
@@ -26,3 +27,6 @@ post_id uuid, user_id uuid,text_field text, comment_count int, posted_date times
 post_id uuid, user_id uuid, nickname text,color text
 ### comment_table (name type)
 comment_id uuid,post_id uuid, user_id uuid, text_content text,likes int,dislikes int
+### like_dislike_table(name type)
+like_dislike_id int(AI),post_id uuid,user_id uuid,comment_id uuid, like_option integer (0 is liked 1 is disliked).
+Please check dislikeAndLikeProcedure.txt file for the likes and dislikes procedures. 

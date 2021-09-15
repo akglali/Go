@@ -1,0 +1,94 @@
+create function dislike(postid text, userid text) returns text
+    language plpgsql
+as
+$$
+BEGIN
+    if exists(select 1
+              from like_dislike_table
+              where post_id::text = postId
+                and user_id::text = userId)
+    then
+        if (select like_option = 1
+            from like_dislike_table
+            where user_id::text = userId
+              and post_id::text = postId)
+        then
+            with del as (delete from like_dislike_table where user_id::text = userid
+                and post_id::text = postId)
+            update post_table
+            set dislikes=post_table.dislikes - 1
+            where post_id::text = postId;
+        else
+            with up as (
+                update like_dislike_table
+                    set like_option = 1
+                    where user_id::text = userId
+                        and post_id::text = postId)
+            update post_table
+            set dislikes=post_table.dislikes + 1,
+                likes = likes - 1
+            where post_id::text = postId;
+        end if;
+    else
+        with ins as (
+            insert into like_dislike_table
+                (post_id, user_id, comment_id, like_option) values (postId::uuid,
+                                                                    userId::uuid,
+                                                                    null, 1))
+        update post_table
+        set dislikes=dislikes + 1
+        where post_id::text= postId;
+    end if;
+    return postid;
+END;
+$$;
+
+alter function dislike(text, text) owner to postgres;
+
+create function likes(postid text, userid text) returns row
+    language plpgsql
+as
+$$
+BEGIN
+    if exists(select 1
+              from like_dislike_table
+              where post_id::text = postId
+                and user_id::text = userId)
+    then
+        if (select like_option = 0
+            from like_dislike_table
+            where user_id::text = userId
+              and post_id::text = postId)
+        then
+            with del as (delete from like_dislike_table where user_id::text = userid
+                and post_id::text = postId)
+            update post_table
+            set likes=likes - 1
+            where post_id::text = postId;
+        else
+            with up as (
+                update like_dislike_table
+                    set like_option = 0
+                    where user_id::text = userId
+                        and post_id::text = postId)
+            update post_table
+            set likes=likes + 1,
+                dislikes = dislikes - 1
+            where post_id::text = postId;
+        end if;
+    else
+        with ins as (
+            insert into like_dislike_table
+                (post_id, user_id, comment_id, like_option) values (postId::uuid,
+                                                                    userId::uuid,
+                                                                    null, 0))
+        update post_table
+        set likes=likes + 1
+        where post_id::text= postId;
+    end if;
+    return postid;
+END;
+$$;
+
+alter function likes(text, text) owner to postgres;
+

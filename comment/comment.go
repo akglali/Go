@@ -20,16 +20,12 @@ func postComment(c *gin.Context) {
 	body := postCommentStruct{}
 	data, err := c.GetRawData()
 	if err != nil {
-		c.JSON(400, helpers.ErrorStruct{
-			Error: "Input format is wrong",
-		})
+		helpers.MyAbort(c, "Input format is wrong")
 		return
 	}
 	err = json.Unmarshal(data, &body)
 	if err != nil {
-		c.AbortWithStatusJSON(400, helpers.ErrorStruct{
-			Error: "Bad input",
-		})
+		helpers.MyAbort(c, "Bad input")
 		return
 	}
 	token := c.GetHeader("token")
