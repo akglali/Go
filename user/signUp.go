@@ -44,7 +44,7 @@ func signup(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, "user is successfully created")
+	c.JSON(200, token)
 }
 
 func login(c *gin.Context) {
