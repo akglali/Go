@@ -59,6 +59,7 @@ func getAllPost(c *gin.Context) {
 	allRows, err := getAllRows()
 	if err != nil {
 		helpers.MyAbort(c, "We can't get all posts!")
+		return
 	}
 	c.JSON(200, allRows)
 }
