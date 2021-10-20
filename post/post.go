@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"strconv"
 	"time"
 	"vibraninlyGo/helpers"
 	"vibraninlyGo/post/postDb"
@@ -12,7 +13,7 @@ import (
 
 func SetupPost(rg *gin.RouterGroup) {
 	rg.POST("/newpost", postSinglePost)
-	rg.GET("/getallpost", getAllPost)
+	rg.GET("/getallpost/:page", getAllPost)
 	rg.GET("/getpost/:postId", getSinglePost)
 	rg.GET("/getowner", getPostsOwner)
 	rg.GET("/getowner/:postId", getSinglePostOwner)
@@ -55,13 +56,28 @@ func postSinglePost(c *gin.Context) {
 	c.JSON(200, pst)
 }
 
+const itemsPerPage = 5
+
 func getAllPost(c *gin.Context) {
 	allRows, err := getAllRows()
+	page, err := strconv.Atoi(c.Param("page"))
+	if err != nil {
+		fmt.Println("Page is not a number")
+	}
+	start := ((page) - 1) * itemsPerPage
+	stop := start + itemsPerPage
+	if start > len(allRows) {
+		return
+	}
+	if stop > len(allRows) {
+		stop = len(allRows)
+	}
+
 	if err != nil {
 		helpers.MyAbort(c, "We can't get all posts!")
 		return
 	}
-	c.JSON(200, allRows)
+	c.JSON(200, allRows[start:stop])
 }
 
 func getAllRows() ([]post, error) {
