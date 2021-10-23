@@ -22,7 +22,7 @@ func GetSinglePostDb(postId string) *sql.Row {
 }
 
 func GetAllPostDb() (*sql.Rows, error) {
-	rows, err := database.Db.Query("select post_table.post_id,post_user_nickname_table.nickname,text_field,comment_count,posted_date,likes,dislikes,post_user_nickname_table.color from post_table left join post_user_nickname_table  on post_table.post_id = post_user_nickname_table.post_id and post_table.user_id=post_user_nickname_table.user_id order by post_table.posted_date")
+	rows, err := database.Db.Query("select post_table.post_id,post_user_nickname_table.nickname,text_field,comment_count,posted_date,likes,dislikes,post_user_nickname_table.color from post_table left join post_user_nickname_table  on post_table.post_id = post_user_nickname_table.post_id and post_table.user_id=post_user_nickname_table.user_id order by post_table.posted_date desc")
 	return rows, err
 
 }

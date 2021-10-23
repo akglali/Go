@@ -1,3 +1,210 @@
+POST http://localhost:8000/comment/post
+Token: c5cd1ed842f72731b329729d6c498f28536174204f63742032332032333a33303a33342032303231
+Content-Type: application/json
+
+{
+  "postId": "26d06ace-a7c4-4088-9783-e1cbce660e99",
+  "textfield": "I am the comment to be deleted"
+}
+
+<> 2021-10-23T233126.200.json
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: c5cd1ed842f72731b329729d6c498f28536174204f63742032332032333a33303a33342032303231
+Content-Type: application/json
+
+{
+  "textfield": "This is the newest post in the history!2"
+}
+
+<> 2021-10-23T233055.200.json
+
+###
+
+POST http://localhost:8000/user/signup
+Content-Type: application/json
+
+{
+  "username": "er4324wer",
+  "password": "ducked2"
+}
+
+<> 2021-10-23T233034.200.json
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+Content-Type: application/json
+
+{
+  "textfield": "This is the newest post in the history!2"
+}
+
+<> 2021-10-20T233008.200.json
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+Content-Type: application/json
+
+{
+  "textfield": "This is the newest post in the history!"
+}
+
+<> 2021-10-20T232949.200.json
+
+###
+
+GET http://localhost:8000/post/getallpost/5
+
+<> 2021-10-20T231851.404.json
+
+###
+
+GET http://localhost:8000/post/getallpost/5
+
+###
+
+GET http://localhost:8000/post/getallpost/5
+
+###
+
+GET http://localhost:8000/post/getallpost/5
+
+###
+
+DELETE http://localhost:8000/post/delete/1419aa57-edfb-4ca5-8c65-4b705e66e40f
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+
+<> 2021-10-20T231717.400.json
+
+###
+
+DELETE http://localhost:8000/post/delete/1419aa57-edfb-4ca5-8c65-4b705e66e40f
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+
+<> 2021-10-20T231712.200.json
+
+###
+
+GET http://localhost:8000/post/getallpost/5
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+Content-Type: application/json
+
+{
+  "textfield": "I hope it will work!!!"
+}
+
+<> 2021-10-20T223738.200.json
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+Content-Type: application/json
+
+{
+  "textfield": "I hope it will work!!!"
+}
+
+<> 2021-10-20T223553.200.json
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+Content-Type: application/json
+
+{
+  "textfield": "I hope it will work!!!"
+}
+
+<> 2021-10-20T222844.200.json
+
+###
+
+DELETE http://localhost:8000/post/delete/2ecd36e1-65f4-4e2d-ae91-1edbd9d56272
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+
+<> 2021-10-20T222801.200.json
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+Content-Type: application/json
+
+{
+  "textfield": "I hope it will work!!!"
+}
+
+<> 2021-10-20T222707.200.json
+
+###
+
+DELETE http://localhost:8000/post/delete/9ee18162-5d47-4a06-92e7-8d2699d032ed
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+
+<> 2021-10-20T222621.200.json
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+Content-Type: application/json
+
+{
+  "textfield": "I hope it will work!!!"
+}
+
+<> 2021-10-20T222524.200.json
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+Content-Type: application/json
+
+{
+  "textfield": "I hope it will work!!!"
+}
+
+<> 2021-10-20T222517.200.json
+
+###
+
+POST http://localhost:8000/post/newpost
+Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
+Content-Type: application/json
+
+{
+  "textfield": "I hope it will work!!!"
+}
+
+<> 2021-10-20T222424.200.json
+
+###
+
+GET http://localhost:8000/post/getallpost/1
+
+<> 2021-10-20T204114.200.json
+
+###
+
+GET http://localhost:8000/post/getallpost/1
+
+<> 2021-10-20T204013.200.json
+
+###
+
 GET http://localhost:8000/post/getallpost/2
 
 <> 2021-10-20T180305.200.json
@@ -249,284 +456,6 @@ Content-Type: application/json
   "commentid": "",
   "likeordislike": "like"
 }
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": "like"
-}
-
-###
-
-POST http://localhost:8000/post/like
-Token: f3bac17ad18db0ca1ea17b0a227183c8Sat Aug  7 23:14:10 2021
-Content-Type: application/json
-
-{
-  "postid": "4aa50155-1e81-440c-bc2e-37be2d0c21a8",
-  "commentid": "",
-  "likeordislike": ""
-}
-
-<> 2021-09-14T191301.200.json
 
 ###
 

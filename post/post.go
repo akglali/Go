@@ -67,9 +67,11 @@ func getAllPost(c *gin.Context) {
 	start := ((page) - 1) * itemsPerPage
 	stop := start + itemsPerPage
 	if start > len(allRows) {
+		c.JSON(404, "No More Post")
 		return
 	}
 	if stop > len(allRows) {
+		fmt.Println("deneme")
 		stop = len(allRows)
 	}
 
